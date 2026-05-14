@@ -8,6 +8,8 @@
 https://github.com/KoukiKimura/JASuppliers.git
 ```
 
+環境構築の詳細と現環境の導入状況は `Work/環境構築.md` を参照する。
+
 ## 1. 前提方針
 
 - WSL2 / Docker Desktop は必須にしない。
