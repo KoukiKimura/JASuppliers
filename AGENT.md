@@ -70,7 +70,7 @@ JASuppliers/
 | API | RESTful / OpenAPI 3.0 |
 | 帳票出力 | Laravel向けPDF生成ライブラリ（詳細設計で確定） |
 | ローカル実行 | Laravel Herd + PostgreSQL Windows版を標準候補とする |
-| Docker | WSL2前提のため必須にしない。将来のリモート確認環境・CI用として任意扱い |
+| Docker | WSL2前提のため必須にしない。将来のCI・デプロイ検討時の任意候補とする |
 
 ---
 
@@ -80,6 +80,8 @@ JASuppliers/
 - 他環境への反映は、原則としてGitHubから最新ソースを取得して各環境でローカル実行する。
 - WSL2 / Docker Desktop は必須条件にしない。
 - Windowsローカルでは Laravel Herd、Composer、PostgreSQL Windows版を使う構成を標準手順とする。
+- Mock確認は、相手側を含む各ローカル環境で構築・実行する方法を主とする。
+- Web公開・クラウド・VPS等へのデプロイ方式は、Laravel実装後に別途検討する。
 - ローカル実行手順は `Work/Readme.md` を参照する。
 - 機密情報、`.env`、DBダンプ、生成物、依存パッケージはGit管理しない。
 

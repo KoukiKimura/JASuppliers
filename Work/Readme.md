@@ -14,6 +14,8 @@ https://github.com/KoukiKimura/JASuppliers.git
 - Windowsローカル環境では Laravel Herd + PostgreSQL Windows版を標準候補とする。
 - DBはPostgreSQLを初期標準とする。
 - Laravelの `.env` により、将来的に接続DBを切り替えられる構成にする。
+- Mock確認は、相手側を含む各ローカル環境で構築・実行する方法を主とする。
+- Web公開・クラウド・VPS等へのデプロイ方式は、Laravel実装後に別途検討する。
 - `.env`、DBダンプ、APIキー、接続文字列、個人情報はGitにコミットしない。
 
 ## 2. 必要なソフトウェア
@@ -117,9 +119,24 @@ php artisan optimize:clear
 npm run build
 ```
 
-## 7. Mock確認用データ
+## 7. Mock確認方法
 
-相手環境で動作確認しやすいように、Laravel実装時にはSeederで以下を用意する。
+Mock確認は、GitHubから最新ソースを取得した各ローカル環境で実施する。
+
+確認者は以下の流れで環境を作成する。
+
+```powershell
+git clone https://github.com/KoukiKimura/JASuppliers.git
+cd JASuppliers
+composer install
+npm install
+copy .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve --host=127.0.0.1 --port=8000
+```
+
+Laravel実装時には、相手環境で動作確認しやすいようにSeederで以下を用意する。
 
 | 種別 | 内容 |
 |------|------|
@@ -128,6 +145,7 @@ npm run build
 | 業務データ | 委託搬入、販売実績、委託消化納入、買取発注、精算データ |
 
 Mock確認は本番データではなく、必ずダミーデータで行う。
+デプロイ方式は後日検討とし、この手順書ではローカル構築・実行を標準とする。
 
 ## 8. トラブルシュート
 
@@ -172,4 +190,3 @@ php artisan migrate:fresh --seed
 - 作業前に `git status` で未コミット差分を確認する。
 - `.env`、DBダンプ、ログ、依存パッケージ、生成ビルド成果物はコミットしない。
 - 仕様変更時は `AGENT.md` と関連資料を更新する。
-
